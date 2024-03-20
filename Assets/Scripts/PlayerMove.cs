@@ -8,9 +8,19 @@ public class PlayerMove : MonoBehaviour
     public float Friction;
     public float MaxSpeed;
     public bool Grounded;
+    public Transform ColliderTransform;
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.S) || Grounded == false)
+        {
+            ColliderTransform.localScale = Vector3.Lerp(ColliderTransform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * 15f);
+        }
+        else
+        {
+            ColliderTransform.localScale = Vector3.Lerp(ColliderTransform.localScale, new Vector3(1f, 1f, 1f), Time.deltaTime * 15f);
+        }
+
         if (Grounded)
         {
             if (Input.GetKeyDown(KeyCode.Space))
