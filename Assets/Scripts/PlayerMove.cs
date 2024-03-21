@@ -38,17 +38,17 @@ public class PlayerMove : MonoBehaviour
         if (Grounded == false)
         {
             speedMultiplier = 0.2f;
+            if (Rigidbody.velocity.x > MaxSpeed && Input.GetAxis("Horizontal") > 0)
+            {
+                speedMultiplier = 0;
+            }
+
+            if (Rigidbody.velocity.x < -MaxSpeed && Input.GetAxis("Horizontal") < 0)
+            {
+                speedMultiplier = 0;
+            }
         }
 
-        if (Rigidbody.velocity.x > MaxSpeed && Input.GetAxis("Horizontal") > 0)
-        {
-            speedMultiplier = 0;
-        }
-
-        if (Rigidbody.velocity.x < -MaxSpeed && Input.GetAxis("Horizontal") < 0)
-        {
-            speedMultiplier = 0;
-        }
 
         Rigidbody.AddForce(Input.GetAxis("Horizontal") * MoveSpeed * speedMultiplier, 0, 0, ForceMode.Acceleration);
 

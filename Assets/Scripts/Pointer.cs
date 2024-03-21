@@ -5,7 +5,7 @@ public class Pointer : MonoBehaviour
     public Transform Aim;
     public Camera PlayerCamera;
 
-    private void Update()
+    private void LateUpdate()
     {
         Ray ray = PlayerCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -18,6 +18,10 @@ public class Pointer : MonoBehaviour
         Vector3 point = ray.GetPoint(distance);
 
         Aim.position = point;
+
+
+        Vector3 toAim = Aim.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(toAim);
 
     }
 }
