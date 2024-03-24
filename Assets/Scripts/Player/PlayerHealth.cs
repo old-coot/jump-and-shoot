@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -7,10 +8,11 @@ public class PlayerHealth : MonoBehaviour
 
     private bool _invulnerable = false;
 
-    public AudioSource TakeDamageSound;
     public AudioSource AddHealSound;
 
     public HealthUI HealthUI;
+
+    public UnityEvent EventOnTakeDamage;
 
     private void Start()
     {
@@ -30,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
             }
             _invulnerable = true;
             Invoke("StopInvulnerable", 1f);
-            TakeDamageSound.Play();
+            EventOnTakeDamage.Invoke();
         }
         HealthUI.DisplayHealth(Health);
 
