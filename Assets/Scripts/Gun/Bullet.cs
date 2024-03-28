@@ -14,4 +14,14 @@ public class Bullet : MonoBehaviour
         Instantiate(EffectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<TakeDamageOnTrigger>())
+        {
+            Instantiate(EffectPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
 }

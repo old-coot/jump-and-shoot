@@ -6,12 +6,11 @@ public class MakeDamageOnCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody)
+        PlayerHealth playerHealth = collision.collider.GetComponentInParent<PlayerHealth>();
+        if (playerHealth)
         {
-            if (collision.rigidbody.GetComponent<PlayerHealth>())
-            {
-                collision.rigidbody.GetComponent<PlayerHealth>().TakeDamage(DamageValue);
-            }
+            collision.rigidbody.GetComponent<PlayerHealth>().TakeDamage(DamageValue);
         }
+        
     }
 }

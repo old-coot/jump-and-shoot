@@ -4,6 +4,11 @@ public class Pointer : MonoBehaviour
 {
     public Transform Aim;
     public Camera PlayerCamera;
+    private Plane _plane;
+
+    private void Awake() {
+        _plane = new Plane(-Vector3.forward, Vector3.zero);
+    }
 
     private void LateUpdate()
     {
@@ -11,10 +16,8 @@ public class Pointer : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * 50f, Color.yellow);
 
-        Plane plane = new Plane(-Vector3.forward, Vector3.zero);
-
         float distance;
-        plane.Raycast(ray, out distance);
+        _plane.Raycast(ray, out distance);
         Vector3 point = ray.GetPoint(distance);
 
         Aim.position = point;

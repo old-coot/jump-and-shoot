@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
             _invulnerable = true;
-            Invoke("StopInvulnerable", 1f);
+            Invoke(nameof(StopInvulnerable), 1f);
             EventOnTakeDamage.Invoke();
         }
         HealthUI.DisplayHealth(Health);
