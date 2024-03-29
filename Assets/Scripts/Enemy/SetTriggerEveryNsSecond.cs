@@ -1,20 +1,18 @@
 using UnityEngine;
 
-public class SetTriggerEveryNSecond : MonoBehaviour
+public class SetTriggerEveryNsSecond : MonoBehaviour
 {
-    public float Period = 7f;
+    public float Period = 3f;
     public Animator Animator;
+    public string TriggerName;
     private float _timer;
-
-    public string TriggerName = "Attack";
-
     private void Update()
     {
         _timer += Time.deltaTime;
         if (_timer > Period)
         {
             _timer = 0;
-            Animator.SetTrigger("TriggerName");
+            Animator.SetTrigger(TriggerName);
         }
     }
 }

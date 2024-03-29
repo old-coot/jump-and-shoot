@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a7c52f79588544ebf459a23429abb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackPeriod: 7
+  Period: 3
   Animator: {fileID: 6270058986316872229}
+  TriggerName: Attack
 --- !u!114 &1571135311500205594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,8 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc220ba90d61a64fafc7f050631a305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarrrotPrefab: {fileID: 904110958855974772, guid: 1623c2596ee779c44bd42f0b3166d063,
-    type: 3}
+  Prefab: {fileID: 904110958855974772, guid: 1623c2596ee779c44bd42f0b3166d063, type: 3}
   Spawn: {fileID: 7364199735934701049}
 --- !u!4 &9018341336301622687 stripped
 Transform:
