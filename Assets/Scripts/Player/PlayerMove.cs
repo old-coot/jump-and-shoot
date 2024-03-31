@@ -9,6 +9,11 @@ public class PlayerMove : MonoBehaviour
     public float MaxSpeed;
     public bool Grounded;
     public Transform ColliderTransform;
+    [Header("Rotate player to target")]
+    public Transform Aim;
+    public Vector3 LeftEuler;
+    public Vector3 RightEuler;
+    private Vector3 _targetEuler;
 
     private void Update()
     {
@@ -29,6 +34,7 @@ public class PlayerMove : MonoBehaviour
             }
 
         }
+        RotateToAim();
     }
 
     private void FixedUpdate()
@@ -76,6 +82,21 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         Grounded = false;
+    }
+
+    private void RotateToAim()
+    {
+        if (transform.position.x < Aim.position.x)
+        {
+            _targetEuler = RightEuler;
+        }
+        else
+        {
+            _targetEuler = LeftEuler;
+        }
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetEuler), Time.deltaTime * 10f);
+
     }
 
 
