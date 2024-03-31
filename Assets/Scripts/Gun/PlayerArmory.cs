@@ -27,4 +27,8 @@ public class PlayerArmory : MonoBehaviour
             }
         }
     }
+
+    public void AddBullets(int gunIndex, int numberOfBullets){
+        Guns[gunIndex].AddBullets(numberOfBullets);
+    }
 }

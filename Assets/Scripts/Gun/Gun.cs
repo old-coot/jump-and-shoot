@@ -50,4 +50,8 @@ public class Gun : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public virtual void AddBullets(int numberOfBullets){
+        
+    }
+
 }
