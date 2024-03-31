@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.unscaledDeltaTime;
         if (_timer > ShotPeriod)
         {
             if (Input.GetMouseButton(0))
@@ -51,7 +51,7 @@ public class Gun : MonoBehaviour
     }
 
     public virtual void AddBullets(int numberOfBullets){
-        
+
     }
 
 }
