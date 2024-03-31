@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -20,18 +21,33 @@ public class Gun : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 _timer = 0f;
-                GameObject newBullet = Instantiate(BulletPrefab, Spawn.position, Spawn.rotation);
-                newBullet.GetComponent<Rigidbody>().velocity = Spawn.forward * BulletSpeed;
-                ShotSound.Play();
-                Flash.SetActive(true);
-                Invoke("HideFlash", 0.08f);
+                Shot();
             }
         }
+    }
+
+    public virtual void Shot()
+    {
+        GameObject newBullet = Instantiate(BulletPrefab, Spawn.position, Spawn.rotation);
+        newBullet.GetComponent<Rigidbody>().velocity = Spawn.forward * BulletSpeed;
+        ShotSound.Play();
+        Flash.SetActive(true);
+        Invoke("HideFlash", 0.08f);
     }
 
     public void HideFlash()
     {
         Flash.SetActive(false);
+    }
+
+    public virtual void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 
 }
