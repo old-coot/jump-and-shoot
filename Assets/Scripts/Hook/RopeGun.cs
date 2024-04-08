@@ -85,7 +85,7 @@ public class RopeGun : MonoBehaviour
             SpringJoint.spring = 100f;
             SpringJoint.damper = 5f;
 
-            _length = Vector3.Distance(RopeStart.position, Hook.transform.position);
+            _length = Vector3.Distance(RopeStart.position, Hook.transform.position) / 2;
             SpringJoint.maxDistance = _length;
             CurrentRopeState = RopeState.Active;
         }
