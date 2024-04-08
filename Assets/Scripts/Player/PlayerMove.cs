@@ -14,6 +14,9 @@ public class PlayerMove : MonoBehaviour
     public Vector3 LeftEuler;
     public Vector3 RightEuler;
     private Vector3 _targetEuler;
+    private int _jumpFrameCounter;
+
+    public Transform Body;
 
     private void Update()
     {
@@ -30,15 +33,26 @@ public class PlayerMove : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Rigidbody.AddForce(0, JumpSpeed, 0, ForceMode.VelocityChange);
+                if (Grounded)
+                {
+                    Jump();
+                }
             }
 
         }
         RotateToAim();
     }
 
+    public void Jump()
+    {
+        Rigidbody.AddForce(0, JumpSpeed, 0, ForceMode.VelocityChange);
+        _jumpFrameCounter = 0;
+
+    }
+
     private void FixedUpdate()
     {
+
         float speedMultiplier = 1f;
 
         if (Grounded == false)
@@ -61,7 +75,14 @@ public class PlayerMove : MonoBehaviour
         if (Grounded)
         {
             Rigidbody.AddForce(-Rigidbody.velocity.x * Friction, 0, 0, ForceMode.VelocityChange);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 15);
+        }
 
+        _jumpFrameCounter += 1;
+        if (_jumpFrameCounter == 2)
+        {
+            Rigidbody.freezeRotation = false;
+            Rigidbody.AddRelativeTorque(0f, 0f, 10f, ForceMode.VelocityChange);
         }
     }
 
@@ -72,10 +93,11 @@ public class PlayerMove : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         float angle = Vector3.Angle(collision.contacts[0].normal, Vector3.up);
-        if (angle < 45)
+        if (angle < 45f)
         {
 
             Grounded = true;
+            Rigidbody.freezeRotation = true;
         }
     }
 
@@ -95,7 +117,7 @@ public class PlayerMove : MonoBehaviour
             _targetEuler = LeftEuler;
         }
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetEuler), Time.deltaTime * 10f);
+        Body.rotation = Quaternion.Lerp(Body.rotation, Quaternion.Euler(_targetEuler), Time.deltaTime * 10f);
 
     }
 
